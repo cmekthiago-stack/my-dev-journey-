@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinton Mutuma | Portfolio</title>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --accent-strong: #115e59;
+      --line: rgba(15, 23, 42, 0.08);
+      --hero-start: #0f172a;
+      --hero-mid: #0b3b60;
+      --hero-end: #0f766e;
+      --glow: rgba(45, 212, 191, 0.28);
+    }
+
+    .dark {
+      --bg: #020617;
+      --surface: rgba(15, 23, 42, 0.78);
+      --surface-strong: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #5eead4;
+      --accent-soft: rgba(45, 212, 191, 0.16);
+      --accent-strong: #99f6e4;
+      --line: rgba(148, 163, 184, 0.14);
+      --hero-start: #020617;
+      --hero-mid: #0f172a;
+      --hero-end: #134e4a;
+      --glow: rgba(45, 212, 191, 0.18);
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 15% 20%, var(--glow), transparent 24%),
+        radial-gradient(circle at 85% 25%, rgba(14, 165, 233, 0.18), transparent 18%),
+        linear-gradient(140deg, var(--hero-start) 0%, var(--hero-mid) 46%, var(--hero-end) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% auto;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      filter: blur(8px);
+    }
+
+    .card-hover {
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px -24px rgba(15, 23, 42, 0.35);
+      border-color: rgba(45, 212, 191, 0.38);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.35rem;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .section-anchor {
+      scroll-margin-top: 6rem;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .text-muted {
+      color: var(--muted);
+    }
+
+    .surface-strong {
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+  </style>
+</head>
+<body class="transition-colors duration-300">
+  <nav class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/65 text-white backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="#home" class="text-2xl font-bold tracking-tight">Clinton Mutuma</a>
+
+      <div class="hidden items-center gap-8 md:flex">
+        <a href="#about" class="nav-link text-sm font-medium text-slate-200">About</a>
+        <a href="#skills" class="nav-link text-sm font-medium text-slate-200">Skills</a>
+        <a href="#projects" class="nav-link text-sm font-medium text-slate-200">Projects</a>
+        <a href="#certifications" class="nav-link text-sm font-medium text-slate-200">Certifications</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-slate-200">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleDarkMode()" class="rounded-full border border-white/10 p-2.5 text-slate-100 transition hover:bg-white/10" aria-label="Toggle color theme">
+          <i id="theme-icon" class="fas fa-moon text-base"></i>
+        </button>
+        <a href="#contact" class="rounded-full bg-teal-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-teal-300">
+          Hire Me
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="home" class="hero-bg flex min-h-screen items-center pt-20 text-white section-anchor">
+      <div class="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.15fr_0.85fr] md:items-center">
+        <div>
+          <div class="mb-6 inline-flex items-center gap-3 rounded-full pill px-4 py-2 text-sm text-slate-100">
+            <span class="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300"></span>
+            Open to freelance and full-time opportunities
+          </div>
+
+          <h1 class="max-w-3xl text-5xl font-bold leading-tight md:text-7xl">
+            Building resilient web products with clean full-stack execution.
+          </h1>
+          <p class="mt-6 max-w-2xl text-xl text-slate-200 md:text-2xl">
+            I'm Clinton Mutuma, a full-stack developer focused on fast, reliable digital experiences for modern businesses and growing teams.
+          </p>
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            I design and build responsive interfaces, scalable backend systems, and practical user journeys that turn ideas into launch-ready products.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#projects" class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-semibold text-slate-950 transition hover:bg-slate-100">
+              View Projects <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="#certifications" class="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 font-semibold text-white transition hover:bg-white/10">
+              See Certification <i class="fas fa-certificate text-sm"></i>
+            </a>
+          </div>
+
+          <div class="mt-14 flex flex-wrap gap-4 text-sm text-slate-200">
+            <span class="rounded-full pill px-4 py-2">Full-Stack Development</span>
+            <span class="rounded-full pill px-4 py-2">Cloud Learning Path</span>
+            <span class="rounded-full pill px-4 py-2">UI-Focused Delivery</span>
+          </div>
+
+          <div class="mt-8 flex items-center gap-5 text-2xl text-slate-200">
+            <a href="https://github.com/cmekthiago-stack" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="transition hover:text-teal-300"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/clinton-mutuma-36304a350/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="transition hover:text-teal-300"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="X profile" class="transition hover:text-teal-300"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <div class="w-full max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-2xl">
+            <div class="overflow-hidden rounded-[1.5rem] border border-white/15 bg-slate-900/40">
+              <img src="dp.jpeg" alt="Portrait of Clinton Mutuma" class="h-[28rem] w-full object-cover object-center" />
+            </div>
+            <div class="mt-5 grid gap-3 text-sm text-slate-200 sm:grid-cols-2">
+              <div class="rounded-2xl bg-white/8 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-300">Focus</p>
+                <p class="mt-2 font-semibold text-white">Frontend and backend product builds</p>
+              </div>
+              <div class="rounded-2xl bg-white/8 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-300">Latest Milestone</p>
+                <p class="mt-2 font-semibold text-white">Ajira cloud training certification</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-anchor py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-14 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">About</p>
+          <h2 class="mt-4 text-4xl font-bold md:text-5xl">Focused on thoughtful engineering and practical delivery.</h2>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-[1.2fr_0.8fr]">
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <p class="text-lg leading-8 text-muted">
+              I enjoy translating ideas into products that feel polished on the surface and dependable underneath. My work blends responsive frontend development, backend logic, and a product mindset that keeps usability, performance, and maintainability aligned.
+            </p>
+            <p class="mt-6 text-lg leading-8 text-muted">
+              Alongside full-stack web development, I continue building my cloud foundation through structured training and mentorship, which helps me think more clearly about scalability, deployment, and real-world system reliability.
+            </p>
+          </div>
+
+          <div class="glass rounded-[2rem] p-8 md:p-10">
+            <h3 class="text-2xl font-bold">Quick Facts</h3>
+            <ul class="mt-6 space-y-4 text-muted">
+              <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Based in Kenya and available for remote collaboration</li>
+              <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Open to freelance, internship, and full-time opportunities</li>
+              <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Growing cloud and deployment skills alongside core web development</li>
+              <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passionate about clean UI, structure, and continuous learning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section-anchor py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Skills</p>
+            <h2 class="mt-4 text-4xl font-bold md:text-5xl">Core technologies I use to ship reliable products.</h2>
+          </div>
+          <p class="max-w-xl text-base leading-7 text-muted">
+            A practical stack for building polished interfaces, business logic, and data-driven experiences.
+          </p>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-network-wired text-5xl text-sky-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">Access Connectivity</h3>
+            <p class="mt-3 leading-7 text-muted">Foundational network access design, device connectivity, and dependable endpoint communication across modern environments.</p>
+          </div>
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-shield-halved text-5xl text-emerald-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">Access Security</h3>
+            <p class="mt-3 leading-7 text-muted">Security-minded access control practices that help protect infrastructure, services, and user connectivity.</p>
+          </div>
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-globe text-5xl text-amber-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">IP Services</h3>
+            <p class="mt-3 leading-7 text-muted">Understanding of core IP-based services that support addressing, communication, and reliable network operations.</p>
+          </div>
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-route text-5xl text-teal-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">Routing</h3>
+            <p class="mt-3 leading-7 text-muted">Knowledge of traffic path selection, network segmentation, and efficient movement of data between connected systems.</p>
+          </div>
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-diagram-project text-5xl text-violet-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">Switching Protocols</h3>
+            <p class="mt-3 leading-7 text-muted">Practical familiarity with switching behavior and the protocols that keep local networks stable, efficient, and organized.</p>
+          </div>
+          <div class="surface-strong card-hover rounded-[2rem] p-8">
+            <i class="fas fa-wifi text-5xl text-rose-500"></i>
+            <h3 class="mt-6 text-2xl font-bold">Wireless LAN Controllers</h3>
+            <p class="mt-3 leading-7 text-muted">Exposure to centralized wireless management concepts for scaling, configuring, and maintaining wireless networks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section-anchor py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-14 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Projects</p>
+          <h2 class="mt-4 text-4xl font-bold md:text-5xl">Selected work and product-focused builds.</h2>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-3">
+          <article class="surface-strong card-hover overflow-hidden rounded-[2rem]">
+            <div class="h-52 overflow-hidden bg-slate-950">
+              <img src="portfolio-cropped.png" alt="Screenshot of Clinton Mutuma's portfolio website" class="h-full w-full object-cover object-top" />
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold">Personal Portfolio Website</h3>
+              <p class="mt-4 leading-7 text-muted">A complete personal portfolio built to present my skills, certifications, contact channels, and project work through a polished responsive interface.</p>
+              <p class="mt-4 text-sm font-medium text-slate-500 dark:text-slate-400">Outcome: Strengthens my professional brand with a clean, accessible, and conversion-focused online presence.</p>
+              <div class="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                <span class="rounded-full bg-sky-100 px-3 py-1 text-sky-700 dark:bg-sky-950/70 dark:text-sky-200">HTML</span>
+                <span class="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700 dark:bg-emerald-950/70 dark:text-emerald-200">Tailwind CSS</span>
+                <span class="rounded-full bg-teal-100 px-3 py-1 text-teal-700 dark:bg-teal-950/70 dark:text-teal-200">Tailwind</span>
+                <span class="rounded-full bg-cyan-100 px-3 py-1 text-cyan-700 dark:bg-cyan-950/70 dark:text-cyan-200">JavaScript</span>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="https://github.com/cmekthiago-stack/personalised_-portfolio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+                  View Code <i class="fab fa-github text-sm"></i>
+                </a>
+                <a href="https://cmekthiago-stack.github.io/personalised_-portfolio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-muted transition hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900/40">
+                  Live Demo <i class="fas fa-arrow-up-right-from-square text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="surface-strong card-hover overflow-hidden rounded-[2rem]">
+            <div class="h-52 overflow-hidden bg-slate-100">
+              <img src="employee-cropped.png" alt="Screenshot of the employee management app dashboard" class="h-full w-full object-cover object-top" />
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold">Employee Management App</h3>
+              <p class="mt-4 leading-7 text-muted">A Django and Python application designed to manage employee records, organize staff information, and support efficient administrative workflows.</p>
+              <p class="mt-4 text-sm font-medium text-slate-500 dark:text-slate-400">Outcome: Demonstrates backend logic, data management, and practical business application development using Django.</p>
+              <div class="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                <span class="rounded-full bg-fuchsia-100 px-3 py-1 text-fuchsia-700 dark:bg-fuchsia-950/70 dark:text-fuchsia-200">Django</span>
+                <span class="rounded-full bg-pink-100 px-3 py-1 text-pink-700 dark:bg-pink-950/70 dark:text-pink-200">Python</span>
+                <span class="rounded-full bg-violet-100 px-3 py-1 text-violet-700 dark:bg-violet-950/70 dark:text-violet-200">CRUD</span>
+                <span class="rounded-full bg-indigo-100 px-3 py-1 text-indigo-700 dark:bg-indigo-950/70 dark:text-indigo-200">Database</span>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="https://github.com/cmekthiago-stack/EmployeeManagementAp/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+                  View Code <i class="fab fa-github text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="surface-strong card-hover overflow-hidden rounded-[2rem]">
+            <div class="flex h-52 items-center justify-center bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 text-white">
+              <span class="text-5xl font-bold">03</span>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold">Networking and Cloud Learning Showcase</h3>
+              <p class="mt-4 leading-7 text-muted">A professional showcase of my Cisco Networking Academy and Ajira Digital achievements, highlighting growth in networking, wireless, and cloud foundations.</p>
+              <p class="mt-4 text-sm font-medium text-slate-500 dark:text-slate-400">Outcome: Reinforces technical credibility by connecting certified learning with my broader software development journey.</p>
+              <div class="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                <span class="rounded-full bg-amber-100 px-3 py-1 text-amber-700 dark:bg-amber-950/70 dark:text-amber-200">Cloud Computing</span>
+                <span class="rounded-full bg-orange-100 px-3 py-1 text-orange-700 dark:bg-orange-950/70 dark:text-orange-200">Mentorship</span>
+                <span class="rounded-full bg-rose-100 px-3 py-1 text-rose-700 dark:bg-rose-950/70 dark:text-rose-200">CCNA</span>
+                <span class="rounded-full bg-yellow-100 px-3 py-1 text-yellow-700 dark:bg-yellow-950/70 dark:text-yellow-200">Networking</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section-anchor py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-14 max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Certifications &amp; Badges</p>
+          <h2 class="mt-4 text-4xl font-bold md:text-5xl">Training, certifications, and badges presented in clear pairs.</h2>
+          <p class="mt-6 leading-8 text-muted">
+            These credentials reflect successful completion of guided training and certification pathways through Ajira Digital and Cisco Networking Academy, reinforcing practical growth in cloud and networking fundamentals.
+          </p>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <div class="flex flex-wrap items-start justify-between gap-6">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Issued certificate</p>
+                <h3 class="mt-4 text-3xl font-bold">Ajira Digital Program Certificate of Completion</h3>
+                <p class="mt-4 text-lg text-muted">Monday 9th March 2026 - Zoom Introduction to Cloud Computing Training / Mentorship</p>
+              </div>
+              <div class="rounded-2xl bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-700 dark:bg-teal-950/60 dark:text-teal-200">
+                Code: TR36680501042026
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Awarded to</p>
+                <p class="mt-2 text-lg font-semibold">Clinton Mutuma</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Program outcome</p>
+                <p class="mt-2 text-lg font-semibold">Completed training and five-week mentorship program</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Start date</p>
+                <p class="mt-2 text-lg font-semibold">31-03-2026</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">End date</p>
+                <p class="mt-2 text-lg font-semibold">01-04-2026</p>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[1.5rem] glass p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Earning criteria</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing grade from Networking Academy instructor</li>
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing score on final exam</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <span class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white dark:bg-white dark:text-slate-950">
+                Ajira certificate on request <i class="fas fa-file-pdf text-sm"></i>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-muted dark:border-slate-700">
+                <i class="fas fa-cloud"></i> Cloud foundations and mentorship
+              </span>
+            </div>
+          </div>
+
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Issued badge</p>
+            <div class="mt-6 flex flex-col items-center rounded-[1.75rem] border border-amber-200 bg-black p-6 text-center shadow-lg">
+              <div class="flex h-44 w-full items-center justify-center rounded-[1.25rem] border border-amber-200/30 bg-slate-950/70 px-6 text-sm font-medium text-slate-300">
+                Ajira badge preview available offline
+              </div>
+            </div>
+            <h3 class="mt-6 text-3xl font-bold">Ajira Digital Badge</h3>
+            <p class="mt-4 leading-8 text-muted">
+              Visual badge for the Ajira Digital cloud training and mentorship achievement, paired with the certificate for a stronger proof-of-learning presentation.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <span class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white dark:bg-white dark:text-slate-950">
+                Badge available on request <i class="fas fa-image text-sm"></i>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-muted dark:border-slate-700">
+                <i class="fas fa-award"></i> Paired with Ajira certificate
+              </span>
+            </div>
+          </div>
+
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <div class="flex flex-wrap items-start justify-between gap-6">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Issued certificate</p>
+                <h3 class="mt-4 text-3xl font-bold">CCNA: Switching, Routing, and Wireless Essentials</h3>
+                <p class="mt-4 text-lg text-muted">Cisco Networking Academy program offered by SYSNET</p>
+              </div>
+              <div class="rounded-2xl bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 dark:bg-sky-950/60 dark:text-sky-200">
+                Completion Date: 13 Jun 2025
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Awarded to</p>
+                <p class="mt-2 text-lg font-semibold">Clinton Mutuma</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Instructor</p>
+                <p class="mt-2 text-lg font-semibold">Muhammad Moosa</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Provider</p>
+                <p class="mt-2 text-lg font-semibold">Cisco Networking Academy</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Partner institution</p>
+                <p class="mt-2 text-lg font-semibold">SYSNET</p>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[1.5rem] glass p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Earning criteria</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing grade from Networking Academy instructor</li>
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing score on final exam</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <span class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white dark:bg-white dark:text-slate-950">
+                Certificate available on request <i class="fas fa-file-pdf text-sm"></i>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-muted dark:border-slate-700">
+                <i class="fas fa-network-wired"></i> Networking and wireless essentials
+              </span>
+            </div>
+          </div>
+
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <div class="flex flex-wrap items-start justify-between gap-6">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Issued certificate</p>
+                <h3 class="mt-4 text-3xl font-bold">CCNA: Introduction to Networks</h3>
+                <p class="mt-4 text-lg text-muted">Cisco Networking Academy program offered by SYSNET</p>
+              </div>
+              <div class="rounded-2xl bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 dark:bg-sky-950/60 dark:text-sky-200">
+                Completion Date: 13 Apr 2025
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Awarded to</p>
+                <p class="mt-2 text-lg font-semibold">Clinton Mutuma</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Instructor</p>
+                <p class="mt-2 text-lg font-semibold">Muhammad Moosa</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Provider</p>
+                <p class="mt-2 text-lg font-semibold">Cisco Networking Academy</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Partner institution</p>
+                <p class="mt-2 text-lg font-semibold">SYSNET</p>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[1.5rem] glass p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Earning criteria</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing grade from Networking Academy instructor</li>
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Passing score on final exam</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <span class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white dark:bg-white dark:text-slate-950">
+                Certificate available on request <i class="fas fa-file-pdf text-sm"></i>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-muted dark:border-slate-700">
+                <i class="fas fa-diagram-project"></i> Networking foundations
+              </span>
+            </div>
+          </div>
+
+          <div class="surface-strong rounded-[2rem] p-8 md:p-10">
+            <div class="flex flex-wrap items-start justify-between gap-6">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 dark:text-teal-300">Issued certificate</p>
+                <h3 class="mt-4 text-3xl font-bold">AWS Cloud Practitioner Certificate</h3>
+                <p class="mt-4 text-lg text-muted">Foundational cloud certification covering core AWS services, concepts, billing, pricing, and architecture basics.</p>
+              </div>
+              <div class="rounded-2xl bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-700 dark:bg-amber-950/60 dark:text-amber-200">
+                AWS Practitioner
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Awarded to</p>
+                <p class="mt-2 text-lg font-semibold">Clinton Mutuma</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Focus area</p>
+                <p class="mt-2 text-lg font-semibold">Cloud foundations</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">Provider</p>
+                <p class="mt-2 text-lg font-semibold">Amazon Web Services</p>
+              </div>
+              <div class="rounded-2xl glass p-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">File</p>
+                <p class="mt-2 text-lg font-semibold">awspractitioner.pdf</p>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[1.5rem] glass p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Highlights</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Reinforces cloud literacy and foundational AWS knowledge</li>
+                <li class="flex gap-3"><i class="fas fa-check mt-1 text-teal-500"></i> Complements the broader networking and cloud learning track shown on the site</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <span class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white dark:bg-white dark:text-slate-950">
+                Certificate available on request <i class="fas fa-file-pdf text-sm"></i>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-muted dark:border-slate-700">
+                <i class="fas fa-cloud"></i> AWS fundamentals
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-anchor py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="rounded-[2rem] bg-slate-950 px-8 py-14 text-white md:px-12">
+          <div class="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.3em] text-teal-300">Contact</p>
+              <h2 class="mt-4 text-4xl font-bold md:text-5xl">Let's build something thoughtful and useful.</h2>
+              <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+                If you need a developer who cares about clean execution, clear interfaces, and steady growth, I'd love to connect.
+              </p>
+            </div>
+            <a href="mailto:cmekthiago@gmail.com" class="inline-flex items-center justify-center rounded-full bg-teal-400 px-8 py-4 font-semibold text-slate-950 transition hover:bg-teal-300">
+              Say Hello
+            </a>
+          </div>
+
+          <div class="mt-10 grid gap-4 text-sm text-slate-300 md:grid-cols-3">
+            <a href="mailto:cmekthiago@gmail.com" class="rounded-2xl border border-white/10 px-5 py-4 transition hover:bg-white/5">cmekthiago@gmail.com</a>
+            <a href="tel:+254700547982" class="rounded-2xl border border-white/10 px-5 py-4 transition hover:bg-white/5">0700 547 982</a>
+            <div class="flex items-center gap-4 rounded-2xl border border-white/10 px-5 py-4">
+              <a href="https://github.com/cmekthiago-stack" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="transition hover:text-teal-300"><i class="fab fa-github text-lg"></i></a>
+              <a href="https://www.linkedin.com/in/clinton-mutuma-36304a350/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="transition hover:text-teal-300"><i class="fab fa-linkedin text-lg"></i></a>
+              <a href="#" aria-label="X profile" class="transition hover:text-teal-300"><i class="fab fa-x-twitter text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200/80 py-8 text-center text-sm text-slate-500 dark:border-slate-800 dark:text-slate-400">
+    © 2026 Clinton Mutuma. All rights reserved.
+  </footer>
+
+  <script>
+    function applyThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.classList.toggle('fa-sun', isDark);
+      icon.classList.toggle('fa-moon', !isDark);
+    }
+
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      applyThemeIcon();
+    }
+
+    applyThemeIcon();
+  </script>
+</body>
+</html>
